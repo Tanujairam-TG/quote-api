@@ -3,7 +3,8 @@ FROM nikolaik/python-nodejs:python3.8-nodejs12 AS builder
 ENV NODE_WORKDIR /app
 WORKDIR $NODE_WORKDIR
 
-COPY package*.json ./
+# Add Yarn repository key
+RUN wget -q -O - https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
 RUN apt-get update \
     && apt-get install -y build-essential gcc wget git libvips \
